@@ -1,7 +1,7 @@
 <div align="center">
 
-<a target="_blank" href="https://nuro.dev">
-    <img alt='Website' src="./public/blog/guia_do_programador/dev1.png" />
+<a target="_blank" href="https://vinicius.is-a.dev">
+    <img alt='Website' src="./public/banner.png" />
 </a>
 
 [![Instagram Badge](https://img.shields.io/badge/Instagram-E4405F?logo=instagram&logoColor=fff&style=flat)](https://instagram.com/vncsmnl)
