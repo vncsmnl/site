@@ -35,12 +35,19 @@ const staticMenuItems: Array<Array<NavigationItem>> = [
 		},
 		{
 			type: NavigationItemType.LINK,
-			icon: 'feather:link',
-			text: 'PC Settings',
+			icon: 'feather:shopping-cart',
+			text: 'Shopping',
 			href: '/referrals',
 		},
 	],
 	[
+		{
+			type: NavigationItemType.LINK,
+			icon: 'feather:instagram',
+			text: 'Instagram',
+			href: 'https://instagram.com/vncsmnl',
+			external: true,
+		},
 		{
 			type: NavigationItemType.LINK,
 			icon: 'feather:twitter',

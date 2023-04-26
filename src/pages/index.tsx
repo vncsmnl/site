@@ -39,8 +39,8 @@ const ACTIONS: Array<NavigationItem> = [
 	{
 		type: NavigationItemType.LINK,
 		external: true,
-		href: 'https://instagram.com/vncsmnl',
-		icon: <Icon className="mr-3" icon="feather:share-2" />,
+		href: 'https://vinicius.is-a.dev',
+		icon: <Icon className="mr-3" icon="feather:send" />,
 		text: 'LinkTree',
 	},
 ];
