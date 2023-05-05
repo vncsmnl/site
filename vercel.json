@@ -1,7 +1,7 @@
 {
 	"$schema": "https://openapi.vercel.sh/vercel.json",
 	"version": 2,
-	"alias": "vini.thedev.idis-a.dev",
+	"alias": "vini.thedev.id",
 	"cleanUrls": true,
 	"public": true,
 	"regions": [

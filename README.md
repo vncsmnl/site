@@ -1,6 +1,6 @@
 <div align="center">
 
-<a target="_blank" href="https://vini.thedev.idis-a.dev">
+<a target="_blank" href="https://vini.thedev.id">
     <img alt='Website' src="./public/banner.png" />
 </a>
 

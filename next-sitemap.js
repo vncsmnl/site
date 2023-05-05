@@ -1,5 +1,5 @@
 const isProduction = process.env.NODE_ENV === 'production';
-const domain = isProduction ? 'vini.thedev.idis-a.dev' : 'localhost:3000';
+const domain = isProduction ? 'vini.thedev.id' : 'localhost:3000';
 const protocol = isProduction ? 'https' : 'http';
 
 /**
