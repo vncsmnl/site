@@ -1,1 +1,23 @@
-[]
+[
+    {
+        "aliases": [
+            "uptime",
+            "status"
+        ],
+        "code": "7p8z",
+        "color": "#0E153A",
+        "description": "Get notified with a radically better infrastructure monitoring platform",
+        "homepage": "https://betteruptime.com",
+        "icon": "heroicons-outline:status-online",
+        "name": "Better Uptime",
+        "url": "https://betteruptime.com/?ref=7p8z"
+    },
+    {
+        "color": "black",
+        "description": "Develop. Preview. Ship.",
+        "homepage": "https://vercel.com/home",
+        "icon": "heroicons-outline:cloud",
+        "name": "Vercel",
+        "url": "https://vercel.com/home?utm_source=nuro&utm_campaign=oss"
+    }
+]

@@ -14,16 +14,16 @@ export function useSeoProps(
 	return {
 		title,
 		description,
-		canonical: `https://nuro.dev/${router.asPath}`,
+		canonical: `https://vini.thedev.id/${router.asPath}`,
 		openGraph: {
 			title,
 			description,
 			site_name: 'vncsmnl',
-			url: `https://nuro.dev/${router.asPath}`,
+			url: `https://vini.thedev.id/${router.asPath}`,
 			type: 'website',
 			images: [
 				{
-					url: 'https://nuro.dev/banner.png',
+					url: 'https://vini.thedev.id/banner.png',
 					alt: description,
 					width: 1280,
 					height: 720,
