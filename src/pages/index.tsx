@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic';
-import { differenceInYears } from 'date-fns';
 import { Icon } from '@iconify/react';
 
 import { Animate, Button, Pill } from '~/components';
@@ -48,11 +47,10 @@ const ACTIONS: Array<NavigationItem> = [
 export default function HomePage(): JSX.Element {
 	const today = new Date();
 	const birthday = new Date('1998-01-07');
-	const age = differenceInYears(today, birthday);
 	const isBirthday =
 		today.getDate() === birthday.getDate() && today.getMonth() === birthday.getMonth();
 
-	const description = `I am a ${age} year old padawan developer & tech video creator`;
+	const description = `I am a padawan developer & tech video creator`;
 
 	return (
 		<Layout.Default>
@@ -77,7 +75,7 @@ export default function HomePage(): JSX.Element {
 							opacity: [0, 1],
 							scale: [0.75, 1],
 						}}
-						className="max-w-xs mt-4 md:mt-8 mx-auto text-base text-gray-300 sm:text-lg md:text-xl md:max-w-3xl"
+						className="max-w-xs mt-4 md:mt-8 mx-auto text-base text-gray-400 sm:text-lg md:text-xl md:max-w-3xl"
 						transition={{
 							delay: 0.5,
 						}}>

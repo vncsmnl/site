@@ -35,8 +35,8 @@ const staticMenuItems: Array<Array<NavigationItem>> = [
 		},
 		{
 			type: NavigationItemType.LINK,
-			icon: 'feather:shopping-cart',
-			text: 'Shopping',
+			icon: 'feather:link',
+			text: 'Referrals',
 			href: '/referrals',
 		},
 	],
