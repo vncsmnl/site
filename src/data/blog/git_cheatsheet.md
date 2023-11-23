@@ -74,8 +74,8 @@ Git Cheatsheet
     - push: Isso irá enviar para o servidor remoto a partir da ramificação local.
 8. Quando você alterna a ramificação, os arquivos no diretório de trabalho são alterados para corresponder a essa ramificação.
 9. Usando git reflog você pode recuperar seu commit destruído ( feito via git reset --hard) usando qualquer
-    - git checkout -b newBranchName <shaViaReflog>
-    - git reset --hard <shaViaReflog> Mas use-o em casos raros, porque você faz o reflog de manter o estado via sha e é difícil ver qual sha pertence ao commit específico.
+    - git checkout -b newBranchName
+    - git reset --hard Mas use-o em casos raros, porque você faz o reflog de manter o estado via sha e é difícil ver qual sha pertence ao commit específico.
 10. git cherry-pick é uma versão de baixo nível de rebase
 11. Para usuários avançados que desejam explorar mais, consulte gitflow. Extensões do Git para criar operações compromissadas usando diferentes modelos de ramificação.
 12. O Git não rastreia pastas vazias. Funciona apenas com arquivos.
