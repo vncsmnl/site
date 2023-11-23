@@ -7,26 +7,21 @@ description: Publicado inicialmente no Github gist.
 date: '2023-11-22'
 ---
 
-<style>
-yellow { color: black; background: #fef08a }
-</style>
-
 Git Cheatsheet
 ========
 
-<yellow></yellow>
 ## vs Perguntas
-1. http://stackoverflow.com/questions/804115 (<yellow>rebase</yellow> vs <yellow>merge</yellow> ).
-2. https://www.atlassian.com/git/tutorials/merging-vs-rebasing (<yellow>rebase</yellow> vs <yellow>merge</yellow>)
-3. https://www.atlassian.com/git/tutorials/undoing-changes/ (<yellow>reset</yellow> vs <yellow>checkout</yellow> vs <yellow>revert</yellow>)
-4. http://stackoverflow.com/questions/2221658 (HEAD^ vs HEAD~) (Ver <yellow>git rev-parse</yellow>)
-5. http://stackoverflow.com/questions/292357 (<yellow>pull</yellow> vs <yellow>fetch</yellow>)
-6. http://stackoverflow.com/questions/39651 (<yellow>stash</yellow> vs <yellow>branch</yellow>)
-7. http://stackoverflow.com/questions/8358035 (<yellow>reset</yellow> vs <yellow>checkout</yellow> vs <yellow>revert</yellow>)
-8. http://stackoverflow.com/questions/5798930 (<yellow>git reset</yellow> vs <yellow>git rm --cached</yellow>)
+1. http://stackoverflow.com/questions/804115 (rebase vs merge ).
+2. https://www.atlassian.com/git/tutorials/merging-vs-rebasing (rebase vs merge)
+3. https://www.atlassian.com/git/tutorials/undoing-changes/ (reset vs checkout vs revert)
+4. http://stackoverflow.com/questions/2221658 (HEAD^ vs HEAD~) (Ver git rev-parse)
+5. http://stackoverflow.com/questions/292357 (pull vs fetch)
+6. http://stackoverflow.com/questions/39651 (stash vs branch)
+7. http://stackoverflow.com/questions/8358035 (reset vs checkout vs revert)
+8. http://stackoverflow.com/questions/5798930 (git reset vs git rm --cached)
 
 ## PERGUNTAS GERAIS
-1. http://stackoverflow.com/questions/5788037 ( Recuperar de <yellow>git reset --hard</yellow>).
+1. http://stackoverflow.com/questions/5788037 ( Recuperar de git reset --hard).
 2. http://stackoverflow.com/questions/1146973/ ( Reverte todas as alterações locais no estado anterior )
 3. http://effectif.com/git/recovering-lost-git-commits ( Recuperando o commit perdido )
 4. https://stackoverflow.com/questions/79165 ( Migrando de SVN )
@@ -45,23 +40,23 @@ Git Cheatsheet
 1. http://www.nicoespeon.com/en/2013/08/which-git-workflow-for-my-project/ (Fluxo de trabalho de Git para projeto)
 2. http://nvie.com/posts/a-successful-git-branching-model/
 3. https://www.wearefine.com/mingle/env-branching-with-git/
-4. https://hackernoon.com/git-merge-vs-rebase-whats-the-diff-76413c117333 (<yellow>rebase</yellow> vs <yellow>merge</yellow>)
+4. https://hackernoon.com/git-merge-vs-rebase-whats-the-diff-76413c117333 (rebase vs merge)
 5. https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History
 
 ## FAST GIT REFERENCE
 
 0. Primeiro faça o download do cheetsheat do oficial: http://git-scm.com
 1. Para iniciantes e intermediários, concentre-se apenas nesses comandos:
-    - Configurando : <yellow>config, help</yellow>.
-    - Criando : <yellow>init, clone</yellow>.
-    - Fazer Mudanças: <yellow>status, diff, add, commit, reset, rm, mv (not important).</yellow>
-    - Ramificação e Fusão: <yellow>branch, checkout, merge, stash</yellow>
-    - Histórico de Revisão: <yellow>log, tag, diff, show</yellow>
-    - Atualizar e Publicar: <yellow>fetch, pull, push, remote.</yellow>
-    - Muito Imp: <yellow>reflog</yellow> . http://effectif.com/git/recovering-lost-git-commits
-2. Comandos que não estão em cheatsheet oficial (e avançado): <yellow>revert, apply, cherry-pick, rebase, clean, show-ref, update-ref, ls-files, rev-parse</yellow>
-    - Comandos de Depuração: <yellow>bisect, blame.</yellow>
-3. <yellow>git stash</yellow> é uma alternativa leve para <yellow>git branch.</yellow>
+    - Configurando : config, help.
+    - Criando : init, clone.
+    - Fazer Mudanças: status, diff, add, commit, reset, rm, mv (not important).
+    - Ramificação e Fusão: branch, checkout, merge, stash
+    - Histórico de Revisão: log, tag, diff, show
+    - Atualizar e Publicar: fetch, pull, push, remote.
+    - Muito Imp: reflog. http://effectif.com/git/recovering-lost-git-commits
+2. Comandos que não estão em cheatsheet oficial (e avançado): revert, apply, cherry-pick, rebase, clean, show-ref, update-ref, ls-files, rev-parse
+    - Comandos de Depuração: bisect, blame.
+3. git stash é uma alternativa leve para git branch.
 4. O Git tem três (ou quatro) estágios:
     - Untracked (novos arquivos): Initial Stage. Significa que os dados aind não foram adicionados ao git.
     - Staged (tracked): Dados adicionados ao git, mas não confirmados.
@@ -69,25 +64,25 @@ Git Cheatsheet
     - Modificado: (Aka Rastreado e não encenado). O quarto estágio ocorre quando os arquivos são modificados após a confirmação.
 5. Fluxo de trabalho do git:
     - Diretório de trabalho: contém os arquivos reais
-    - Índice: Atua como uma área de preparação. Ou seja, instantâneo para o próximo commit. Será feito por <yellow>git add</yellow> comando.
+    - Índice: Atua como uma área de preparação. Ou seja, instantâneo para o próximo commit. Será feito por git add comando.
     - HEAD: Aponta para o último commit (e ramificação atual) que você fez.
 6. Qualquer coisa comprometida no Git quase pode ser recuperada. No entanto, os arquivos que não foram confirmados não podem ser recuperados.
 7. Descrição dos comandos de atualização e busca:
-    - <yellow>remote</yellow>: ele gerencia apenas o conjunto de repositórios de faixas.
-    - <yellow>fetch</yellow>: Você pode buscar novos trabalhos nesse servidor remoto após a clonagem. Não é semelhante a clone. Mais tarde, você pode mesclar esse repo com o existente com merge comando.
-    - <yellow>pull</yellow>: Busque e mescle automaticamente o mais recente commit do servidor remoto para a filial local. Por padrão, combina buscar e mesclar.
-    - <yellow>push</yellow>: Isso irá enviar para o servidor remoto a partir da ramificação local.
+    - remote: ele gerencia apenas o conjunto de repositórios de faixas.
+    - fetch: Você pode buscar novos trabalhos nesse servidor remoto após a clonagem. Não é semelhante a clone. Mais tarde, você pode mesclar esse repo com o existente com merge comando.
+    - pull: Busque e mescle automaticamente o mais recente commit do servidor remoto para a filial local. Por padrão, combina buscar e mesclar.
+    - push: Isso irá enviar para o servidor remoto a partir da ramificação local.
 8. Quando você alterna a ramificação, os arquivos no diretório de trabalho são alterados para corresponder a essa ramificação.
-9. Usando <yellow>git reflog</yellow> você pode recuperar seu commit destruído ( feito via <yellow>git reset --hard</yellow>) usando qualquer
-    - <yellow>git checkout -b newBranchName <shaViaReflog></yellow>
-    - <yellow>git reset --hard <shaViaReflog></yellow> Mas use-o em casos raros, porque você faz o reflog de manter o estado via sha e é difícil ver qual sha pertence ao commit específico.
-10. <yellow>git cherry-pick</yellow> é uma versão de baixo nível de <yellow>rebase</yellow>.
+9. Usando git reflog você pode recuperar seu commit destruído ( feito via git reset --hard) usando qualquer
+    - git checkout -b newBranchName <shaViaReflog>
+    - git reset --hard <shaViaReflog> Mas use-o em casos raros, porque você faz o reflog de manter o estado via sha e é difícil ver qual sha pertence ao commit específico.
+10. git cherry-pick é uma versão de baixo nível de rebase
 11. Para usuários avançados que desejam explorar mais, consulte gitflow. Extensões do Git para criar operações compromissadas usando diferentes modelos de ramificação.
 12. O Git não rastreia pastas vazias. Funciona apenas com arquivos.
 
 ## GIT TIPS AND SHORTCUTS
 
-Os comandos mais usados são: <yellow>init, clone, status, log, add, commit, reset, rm, branch, checkout, merge, stash</yellow>
+Os comandos mais usados são: init, clone, status, log, add, commit, reset, rm, branch, checkout, merge, stash.
 
 ```bash
 ## -- Initializing a new git repository
@@ -292,7 +287,6 @@ Os comandos mais usados são: <yellow>init, clone, status, log, add, commit, res
 NOTA: git revert é um comando avançado e pode excluir acidentalmente seus arquivos, se você não tiver cometido. http://stackoverflow.com/questions/8358035/whats-the-difference-between-git-revert-checkout-and-reset
 
 Basicamente git revert desfazer alterações com o novo histórico de commit (ou seja, introduzir um novo commit que inverta o especificado) enquanto git reset (com --hard) CUIDADO. Quaisquer alterações nos arquivos rastreados na árvore de trabalho e no índice são descartadas. git reset (com --soft) A opção não toca no arquivo de índice nem na árvore de trabalho. Neste caso, o arquivo de índice é encenado, mas não confirmado e logo após este comando você pode usar git commit. git reset (com --mixed) Opção redefinir o índice, mas não a árvore de trabalho. Neste caso, o arquivo de índice não é encenado, então após este comando você tem que usar git add e git commit.
-
 
 ## Git rm and Git reset
 
