@@ -1,7 +1,7 @@
 <div align="center">
 
 <a target="_blank" href="https://vini.thedev.id">
-    <img alt='Website' src="./public/banner.png" />
+    <img alt='Website' src="./public/1.png" />
 </a>
 
 [![Instagram Badge](https://img.shields.io/badge/Instagram-E4405F?logo=instagram&logoColor=fff&style=flat)](https://instagram.com/vncsmnl)
