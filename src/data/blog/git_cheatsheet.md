@@ -7,9 +7,6 @@ description: Publicado inicialmente no Github gist.
 date: '2023-11-22'
 ---
 
-Git Cheatsheet
-========
-
 ## vs Perguntas
 1. http://stackoverflow.com/questions/804115 (rebase vs merge ).
 2. https://www.atlassian.com/git/tutorials/merging-vs-rebasing (rebase vs merge)
