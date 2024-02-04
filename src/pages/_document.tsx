@@ -5,7 +5,7 @@ export default function Document(): JSX.Element {
 	return (
 		<Html lang="en">
 			<Head>
-				<link rel="icon" type="image/png" href="/favicon.png" />
+				<link rel="icon" type="image/gif" href="/favicon.gif" />
 			</Head>
 			<body
 				className={clsx(
