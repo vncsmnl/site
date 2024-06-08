@@ -1,20 +1,20 @@
 [
 	{
-		"date": "12-20-2023",
-		"title": "Graduated University!",
-		"description": "Successfully completed my Bachelor's Degree",
-		"icon": "feather:award"
+		"date": "03-18-2024",
+		"title": "Start Master's degree!",
+		"description": "Began studying Computer Science, Information Systems at University of Brasilia",
+		"icon": "feather:book"
 	},
 	{
-		"date": "04-22-2023",
-		"title": "Launched vncsmnl.dev",
-		"description": "Successfully launched my tech video creator project",
-		"icon": "feather:award"
+		"date": "02-05-2022",
+		"title": "Start College",
+		"description": "Began studying Computer Science, Information Systems at Anhanguera Educacional",
+		"icon": "feather:book"
 	},
 	{
-		"date": "02-10-2022",
+		"date": "02-10-2017",
 		"title": "Start University",
-		"description": "Began studying Computer Programming at Anhanguera Educacional",
+		"description": "Began studying Biomedical Science at Catholic University of Brasilia",
 		"icon": "feather:book"
 	},
 	{
