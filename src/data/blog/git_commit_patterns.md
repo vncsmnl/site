@@ -3,11 +3,11 @@ banner_alt: Git Commit Patterns
 banner: https://images.unsplash.com/photo-1556075798-4825dfaaf498?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 title_prefix: GIT
 title: Git Commit Patterns
-description: Publicado inicialmente no Github gist.
+description: Publicado inicialmente por iuricode no Github.
 date: '2023-11-22'
 ---
 
-**[forked to iuricode](https://github.com/iuricode/padroes-de-commits)**
+**[forked from iuricode](https://github.com/iuricode/padroes-de-commits)**
 
 # Padrões de commits 📜
 
