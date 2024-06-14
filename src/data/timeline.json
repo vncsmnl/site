@@ -1,19 +1,19 @@
 [
 	{
 		"date": "03-18-2024",
-		"title": "Start Master's degree!",
+		"title": "Started Master's degree!",
 		"description": "Began studying Computer Science, Information Systems at University of Brasilia",
-		"icon": "feather:book"
+		"icon": "feather:award"
 	},
 	{
 		"date": "02-05-2022",
-		"title": "Start College",
+		"title": "Started College",
 		"description": "Began studying Computer Science, Information Systems at Anhanguera Educacional",
-		"icon": "feather:book"
+		"icon": "feather:trending-up"
 	},
 	{
 		"date": "02-10-2017",
-		"title": "Start University",
+		"title": "Started University",
 		"description": "Began studying Biomedical Science at Catholic University of Brasilia",
 		"icon": "feather:book"
 	},
