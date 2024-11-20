@@ -255,69 +255,322 @@ O commit semântico possui os elementos estruturais abaixo (tipos), que informam
   </tbody>
 </table>
 
-| Commit Emoji | Colon Syntax          | Description                               |
-|--------------|-----------------------|-------------------------------------------|
-| 🎨           | :art:                 | Improving structure or format of code    |
-| ⚡           | :zap:                 | Improving performance                     |
-| 🔥           | :fire:                | Removing code or files                   |
-| 🐛           | :bug:                 | Fixing a bug                             |
-| 🚑           | :ambulance:           | Critical hotfix                          |
-| ✨           | :sparkles:            | Introducing a new feature                |
-| 📝           | :memo:                | Writing documentation                    |
-| 🚀           | :rocket:              | Deploying code                           |
-| 💄           | :lipstick:            | Updating the UI or style files           |
-| 🎉           | :tada:                | Initial commit                           |
-| ✅           | :white_check_mark:    | Adding tests                             |
-| 🔒           | :lock:                | Fixing security issues                   |
-| 🍎           | :apple:               | Fixing something with macOS              |
-| 🐧           | :penguin:             | Fixing something with Linux              |
-| 🏁           | :checkered_flag:      | Fixing something with Windows            |
-| 🍏           | :green_apple:         | Fixing something with iOS                |
-| 🔖           | :bookmark:            | Releasing / Versioning tags              |
-| 🚨           | :rotating_light:      | Removing linter warnings                 |
-| 🚧           | :construction:        | Work in progress                         |
-| 💚           | :green_heart:         | Fixing CI build                          |
-| ⬇           | :arrow_down:          | Downgrading dependencies                 |
-| ⬆           | :arrow_up:            | Upgrading dependencies                   |
-| 📌           | :pushpin:             | Pinning dependencies to specific versions|
-| 👷‍           | :construction_worker: | Add CI build system                      |
-| 📈           | :chart_with_upward_trend: | Adding analytics or code tracking       |
-| ♻           | :recycle:             | Refactoring code                         |
-| 🐳           | :whale:               | Work about Docker                        |
-| ➕           | :heavy_plus_sign:     | Adding a dependency                       |
-| ➖           | :heavy_minus_sign:    | Removing a dependency                    |
-| 🔧           | :wrench:              | Changing configuration files             |
-| 🌐           | :globe_with_meridians:| Internationalization and localization    |
-| ✏           | :pencil2:             | Fixing typos                             |
-| 💩           | :hankey:              | Writing bad code that needs to be improved|
-| ⏪           | :rewind:              | Reverting changes                        |
-| 🔀           | :twisted_rightwards_arrows: | Merging branches                   |
-| 📦           | :package:             | Updating compiled files or packages      |
-| 👽           | :alien:               | Updating code due to external changes    |
-| 🚚           | :truck:               | Moving or renaming files                 |
-| 📄           | :page_facing_up:      | Adding or updating license               |
-| 💥           | :boom:                | Introducing breaking changes             |
-| 🍱           | :bento:               | Adding or updating assets                |
-| 👌           | :ok_hand:             | Updating code due to code review changes |
-| ♿           | :wheelchair:          | Improving accessibility                  |
-| 💡           | :bulb:                | Documenting source code                  |
-| 🍻           | :beers:               | WCD - Writing code drunkenly             |
-| 💬           | :speech_balloon:      | Updating text and literals               |
-| 🗃           | :card_file_box:       | Performing database related changes      |
-| 🔊           | :loud_sound:          | Adding logs                              |
-| 🔇           | :mute:                | Removing logs                            |
-| 👥           | :bust_in_silhouette:  | Adding contributors                       |
-| 🚸           | :children_crossing:   | Improving user experience / usability    |
-| 🏗           | :building_construction: | Making architectural changes           |
-| 📱           | :iphone:              | Working on responsive design             |
-| 🤡           | :clown_face:          | Mocking things                           |
-| 🥚           | :egg:                 | Adding an easter egg                     |
-| 🙈           | :see_no_evil:         | Adding or updating a .gitignore file     |
-| 📸           | :camera_flash:        | Adding or updating snapshots             |
-| ⚗           | :alembic:             | Experimenting with new things            |
-| 🔍           | :mag:                 | Improving SEO                            |
-| ☸           | :wheel_of_dharma:     | Work about Kubernetes                    |
-| 🏷           | :label:               | Adding or updating types (Flow, Typescript) |
+<table>
+  <thead>
+    <tr>
+      <th>Commit Emoji</th>
+      <th>Colon Syntax</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>🎨</td>
+      <td><code>:art:</code></td>
+      <td>Improving structure or format of code</td>
+    </tr>
+    <tr>
+      <td>⚡</td>
+      <td><code>:zap:</code></td>
+      <td>Improving performance</td>
+    </tr>
+    <tr>
+      <td>🔥</td>
+      <td><code>:fire:</code></td>
+      <td>Removing code or files</td>
+    </tr>
+    <tr>
+      <td>🐛</td>
+      <td><code>:bug:</code></td>
+      <td>Fixing a bug</td>
+    </tr>
+    <tr>
+      <td>🚑</td>
+      <td><code>:ambulance:</code></td>
+      <td>Critical hotfix</td>
+    </tr>
+    <tr>
+      <td>✨</td>
+      <td><code>:sparkles:</code></td>
+      <td>Introducing a new feature</td>
+    </tr>
+    <tr>
+      <td>📝</td>
+      <td><code>:memo:</code></td>
+      <td>Writing documentation</td>
+    </tr>
+    <tr>
+      <td>🚀</td>
+      <td><code>:rocket:</code></td>
+      <td>Deploying code</td>
+    </tr>
+    <tr>
+      <td>💄</td>
+      <td><code>:lipstick:</code></td>
+      <td>Updating the UI or style files</td>
+    </tr>
+    <tr>
+      <td>🎉</td>
+      <td><code>:tada:</code></td>
+      <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>✅</td>
+      <td><code>:white_check_mark:</code></td>
+      <td>Adding tests</td>
+    </tr>
+    <tr>
+      <td>🔒</td>
+      <td><code>:lock:</code></td>
+      <td>Fixing security issues</td>
+    </tr>
+    <tr>
+      <td>🍎</td>
+      <td><code>:apple:</code></td>
+      <td>Fixing something with macOS</td>
+    </tr>
+    <tr>
+      <td>🐧</td>
+      <td><code>:penguin:</code></td>
+      <td>Fixing something with Linux</td>
+    </tr>
+    <tr>
+      <td>🏁</td>
+      <td><code>:checkered_flag:</code></td>
+      <td>Fixing something with Windows</td>
+    </tr>
+    <tr>
+      <td>🍏</td>
+      <td><code>:green_apple:</code></td>
+      <td>Fixing something with iOS</td>
+    </tr>
+    <tr>
+      <td>🔖</td>
+      <td><code>:bookmark:</code></td>
+      <td>Releasing / Versioning tags</td>
+    </tr>
+    <tr>
+      <td>🚨</td>
+      <td><code>:rotating_light:</code></td>
+      <td>Removing linter warnings</td>
+    </tr>
+    <tr>
+      <td>🚧</td>
+      <td><code>:construction:</code></td>
+      <td>Work in progress</td>
+    </tr>
+    <tr>
+      <td>💚</td>
+      <td><code>:green_heart:</code></td>
+      <td>Fixing CI build</td>
+    </tr>
+    <tr>
+      <td>⬇</td>
+      <td><code>:arrow_down:</code></td>
+      <td>Downgrading dependencies</td>
+    </tr>
+    <tr>
+      <td>⬆</td>
+      <td><code>:arrow_up:</code></td>
+      <td>Upgrading dependencies</td>
+    </tr>
+    <tr>
+      <td>📌</td>
+      <td><code>:pushpin:</code></td>
+      <td>Pinning dependencies to specific versions</td>
+    </tr>
+    <tr>
+      <td>👷‍</td>
+      <td><code>:construction_worker:</code></td>
+      <td>Add CI build system</td>
+    </tr>
+    <tr>
+      <td>📈</td>
+      <td><code>:chart_with_upward_trend:</code></td>
+      <td>Adding analytics or code tracking</td>
+    </tr>
+    <tr>
+      <td>♻</td>
+      <td><code>:recycle:</code></td>
+      <td>Refactoring code</td>
+    </tr>
+    <tr>
+      <td>🐳</td>
+      <td><code>:whale:</code></td>
+      <td>Work about Docker</td>
+    </tr>
+    <tr>
+      <td>➕</td>
+      <td><code>:heavy_plus_sign:</code></td>
+      <td>Adding a dependency</td>
+    </tr>
+    <tr>
+      <td>➖</td>
+      <td><code>:heavy_minus_sign:</code></td>
+      <td>Removing a dependency</td>
+    </tr>
+    <tr>
+      <td>🔧</td>
+      <td><code>:wrench:</code></td>
+      <td>Changing configuration files</td>
+    </tr>
+    <tr>
+      <td>🌐</td>
+      <td><code>:globe_with_meridians:</code></td>
+      <td>Internationalization and localization</td>
+    </tr>
+    <tr>
+      <td>✏</td>
+      <td><code>:pencil2:</code></td>
+      <td>Fixing typos</td>
+    </tr>
+    <tr>
+      <td>💩</td>
+      <td><code>:hankey:</code></td>
+      <td>Writing bad code that needs to be improved</td>
+    </tr>
+    <tr>
+      <td>⏪</td>
+      <td><code>:rewind:</code></td>
+      <td>Reverting changes</td>
+    </tr>
+    <tr>
+      <td>🔀</td>
+      <td><code>:twisted_rightwards_arrows:</code></td>
+      <td>Merging branches</td>
+    </tr>
+    <tr>
+      <td>📦</td>
+      <td><code>:package:</code></td>
+      <td>Updating compiled files or packages</td>
+    </tr>
+    <tr>
+      <td>👽</td>
+      <td><code>:alien:</code></td>
+      <td>Updating code due to external changes</td>
+    </tr>
+    <tr>
+      <td>🚚</td>
+      <td><code>:truck:</code></td>
+      <td>Moving or renaming files</td>
+    </tr>
+    <tr>
+      <td>📄</td>
+      <td><code>:page_facing_up:</code></td>
+      <td>Adding or updating license</td>
+    </tr>
+    <tr>
+      <td>💥</td>
+      <td><code>:boom:</code></td>
+      <td>Introducing breaking changes</td>
+    </tr>
+    <tr>
+      <td>🍱</td>
+      <td><code>:bento:</code></td>
+      <td>Adding or updating assets</td>
+    </tr>
+    <tr>
+      <td>👌</td>
+      <td><code>:ok_hand:</code></td>
+      <td>Updating code due to code review changes</td>
+    </tr>
+    <tr>
+      <td>♿</td>
+      <td><code>:wheelchair:</code></td>
+      <td>Improving accessibility</td>
+    </tr>
+    <tr>
+      <td>💡</td>
+      <td><code>:bulb:</code></td>
+      <td>Documenting source code</td>
+    </tr>
+    <tr>
+      <td>🍻</td>
+      <td><code>:beers:</code></td>
+      <td>WCD - Writing code drunkenly</td>
+    </tr>
+    <tr>
+      <td>💬</td>
+      <td><code>:speech_balloon:</code></td>
+      <td>Updating text and literals</td>
+    </tr>
+    <tr>
+      <td>🗃</td>
+      <td><code>:card_file_box:</code></td>
+      <td>Performing database related changes</td>
+    </tr>
+    <tr>
+      <td>🔊</td>
+      <td><code>:loud_sound:</code></td>
+      <td>Adding logs</td>
+    </tr>
+    <tr>
+      <td>🔇</td>
+      <td><code>:mute:</code></td>
+      <td>Removing logs</td>
+    </tr>
+    <tr>
+      <td>👥</td>
+      <td><code>:bust_in_silhouette:</code></td>
+      <td>Adding contributors</td>
+    </tr>
+    <tr>
+      <td>🚸</td>
+      <td><code>:children_crossing:</code></td>
+      <td>Improving user experience / usability</td>
+    </tr>
+    <tr>
+      <td>🏗</td>
+      <td><code>:building_construction:</code></td>
+      <td>Making architectural changes</td>
+    </tr>
+    <tr>
+      <td>📱</td>
+      <td><code>:iphone:</code></td>
+      <td>Working on responsive design</td>
+    </tr>
+    <tr>
+      <td>🤡</td>
+      <td><code>:clown_face:</code></td>
+      <td>Mocking things</td>
+    </tr>
+    <tr>
+      <td>🥚</td>
+      <td><code>:egg:</code></td>
+      <td>Adding an easter egg</td>
+    </tr>
+    <tr>
+      <td>🙈</td>
+      <td><code>:see_no_evil:</code></td>
+      <td>Adding or updating a .gitignore file</td>
+    </tr>
+    <tr>
+      <td>📸</td>
+      <td><code>:camera_flash:</code></td>
+      <td>Adding or updating snapshots</td>
+    </tr>
+    <tr>
+      <td>⚗</td>
+      <td><code>:alembic:</code></td>
+      <td>Experimenting with new things</td>
+    </tr>
+    <tr>
+      <td>🔍</td>
+      <td><code>:mag:</code></td>
+      <td>Improving SEO</td>
+    </tr>
+    <tr>
+      <td>☸</td>
+      <td><code>:wheel_of_dharma:</code></td>
+      <td>Work about Kubernetes</td>
+    </tr>
+    <tr>
+      <td>🏷</td>
+      <td><code>:label:</code></td>
+      <td>Adding or updating types (Flow, Typescript)</td>
+    </tr>
+  </tbody>
+</table>
 
 
 ## 💻 Exemplos
