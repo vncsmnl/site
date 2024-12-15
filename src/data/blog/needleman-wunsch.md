@@ -1,6 +1,6 @@
 ---
 banner_alt: Needleman-Wunsch algorithm
-banner: https://plus.unsplash.com/premium_photo-1676035055997-8a0b479d6e7e?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+banner: https://images.unsplash.com/photo-1732046801426-f32529468176?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 title_prefix: needleman-wunsch
 title: Introdução Needleman-Wunsch
 description: O alinhamento de sequências consiste em arranjar duas ou mais sequências de forma a maximizar a correspondência entre os seus elementos.
