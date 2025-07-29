@@ -6,6 +6,10 @@
 	"repository": "https://github.com/vncsmnl/site.git",
 	"author": "vncsmnl <me@vncsmnl.dev>",
 	"license": "MIT",
+	"engines": {
+		"node": ">=22.0.0",
+		"npm": ">=10.0.0"
+	},
 	"prettier": {
 		"arrowParens": "always",
 		"bracketSpacing": true,
@@ -70,7 +74,7 @@
 	},
 	"devDependencies": {
 		"@types/canvas-confetti": "^1.9.0",
-		"@types/node": "^16.18.126",
+		"@types/node": "^22.0.0",
 		"@types/node-fetch": "^2.6.12",
 		"@types/nprogress": "^0.2.3",
 		"@types/react": "^17.0.87",
