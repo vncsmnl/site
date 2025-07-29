@@ -101,7 +101,8 @@ export default function BlogPost({ post }: BlogPostProps): JSX.Element {
 						</div>
 
 						<article className="max-w-prose prose prose-primary prose-lg text-gray-500 mx-auto">
-							<MDXRemote {...post.source} components={Blog.X} />
+							{/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+							<MDXRemote {...post.source} components={Blog.X as any} />
 						</article>
 					</div>
 				</div>

@@ -1,4 +1,4 @@
-import { animate, spring } from 'motion';
+import { animate } from 'motion';
 import { isCrawlerUserAgent } from 'is-web-crawler';
 import { useEffect, useRef } from 'react';
 import { useMedia } from 'react-use';
@@ -18,7 +18,7 @@ type AnimateProps<T extends ElementType> = {
 const defaultTransition: AnimationOptionsWithOverrides = {
 	delay: 0,
 	duration: 1500,
-	easing: spring(),
+	easing: 'ease-out',
 	repeat: 0,
 };
 

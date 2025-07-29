@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import Link from 'next/link';
 import { forwardRef, Fragment } from 'react';
 import { Icon } from '@iconify/react';
 import { Menu, Transition } from '@headlessui/react';
@@ -64,13 +63,14 @@ function MenuButtonIcon({
  *
  * @see https://headlessui.dev/react/menu#integrating-with-next-js
  */
-function MenuLink({ children, href, onClick, ...rest }: MenuLinkProps): JSX.Element {
+function MenuLink({ children, href, active, ...rest }: MenuLinkProps & { active: boolean }): JSX.Element {
 	return (
-		<Link href={href} passHref>
-			<StyledMenuItem onClick={(...args): void => onClick(...args)} {...rest}>
-				{children}
-			</StyledMenuItem>
-		</Link>
+		<StyledMenuItem
+			href={href}
+			active={active}
+			{...rest}>
+			{children}
+		</StyledMenuItem>
 	);
 }
 

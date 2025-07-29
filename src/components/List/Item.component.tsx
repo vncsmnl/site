@@ -86,11 +86,10 @@ export function Item({
 										);
 
 									return (
-										<Link href={action.href} passHref>
+										<Link href={action.href} key={index} legacyBehavior passHref>
 											<Action
 												as="a"
 												aria-label={action.label}
-												key={index}
 												onClick={action.onClick}>
 												<span className="sr-only">{action.label}</span>
 												<Icon className="mt-1" icon={action.icon} />
