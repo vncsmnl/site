@@ -17,7 +17,9 @@ const ContentSecurityPolicy = `
  * @type {import('next').NextConfig}
  */
 const config = {
+	trailingSlash: true,
 	images: {
+		unoptimized: true,
 		domains: [
 			// Discord assets
 			'cdn.discordapp.com',
