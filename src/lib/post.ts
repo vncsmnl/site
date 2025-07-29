@@ -11,6 +11,7 @@ import RemarkPrism from 'remark-prism';
 import RemarkSlug from 'remark-slug';
 
 import type { FrontMatter, Post, RawFrontMatter } from '~/types';
+import remarkMath from 'remark-math';
 
 const BLOG_POSTS_DIR = join(process.cwd(), 'src', 'data', 'blog');
 
@@ -61,7 +62,7 @@ export async function getPost(slug: string): Promise<Post> {
 			rehypePlugins: [
 				[RehypeAutolinkHeadings, {}] as const,  // Garantir que o tipo seja corretamente inferido
 			],
-			remarkPlugins: [RemarkCodeTitles, RemarkEmoji, RemarkPrism, RemarkSlug],
+			remarkPlugins: [RemarkCodeTitles, RemarkEmoji, RemarkPrism, RemarkSlug, remarkMath],
 		},
 	});
 
