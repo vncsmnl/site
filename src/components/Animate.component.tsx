@@ -5,20 +5,20 @@ import { useMedia } from 'react-use';
 
 import { usePersistantState } from '~/lib';
 
-import type { AnimationOptionsWithOverrides, MotionKeyframesDefinition } from '@motionone/dom';
 import type { ComponentPropsWithRef, ElementType } from 'react';
+import type { AnimationOptions, DOMKeyframesDefinition } from 'motion';
 
 type AnimateProps<T extends ElementType> = {
-	animation: MotionKeyframesDefinition;
+	animation: DOMKeyframesDefinition;
 	as?: T;
 	enabled?: boolean;
-	transition?: AnimationOptionsWithOverrides;
+	transition?: AnimationOptions;
 } & Omit<ComponentPropsWithRef<T>, 'animation' | 'as' | 'transition'>;
 
-const defaultTransition: AnimationOptionsWithOverrides = {
+const defaultTransition: AnimationOptions = {
 	delay: 0,
-	duration: 1500,
-	easing: 'ease-out',
+	duration: 0.5,
+	ease: 'easeInOut',
 	repeat: 0,
 };
 
@@ -33,7 +33,7 @@ export function Animate<T extends ElementType>({
 	const { animations } = usePersistantState().get();
 	const prefersReducedMotion = useMedia('(prefers-reduced-motion)', true);
 
-	const ref = useRef<HTMLElement | null>(null);
+	const ref = useRef<any>(null);
 
 	useEffect(() => {
 		if (ref.current && enabled && animations && !(prefersReducedMotion || isCrawlerUserAgent()))
@@ -43,10 +43,12 @@ export function Animate<T extends ElementType>({
 			});
 	}, [animation, animations, enabled, prefersReducedMotion, transition]);
 
+	// @ts-ignore - Complex generic ref typing issue with Motion
+	const ComponentWithRef = Component as any;
+
 	return (
-		// @ts-expect-error Valid component
-		<Component ref={ref} {...rest}>
+		<ComponentWithRef ref={ref} {...rest}>
 			{children}
-		</Component>
+		</ComponentWithRef>
 	);
 }
