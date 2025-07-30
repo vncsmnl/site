@@ -33,7 +33,7 @@ export function Animate<T extends ElementType>({
 	const { animations } = usePersistantState().get();
 	const prefersReducedMotion = useMedia('(prefers-reduced-motion)', true);
 
-	const ref = useRef<any>(null);
+	const ref = useRef<HTMLElement>(null);
 
 	useEffect(() => {
 		if (ref.current && enabled && animations && !(prefersReducedMotion || isCrawlerUserAgent()))
@@ -43,8 +43,7 @@ export function Animate<T extends ElementType>({
 			});
 	}, [animation, animations, enabled, prefersReducedMotion, transition]);
 
-	// @ts-ignore - Complex generic ref typing issue with Motion
-	const ComponentWithRef = Component as any;
+	const ComponentWithRef = Component as ElementType;
 
 	return (
 		<ComponentWithRef ref={ref} {...rest}>
