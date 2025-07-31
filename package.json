@@ -6,6 +6,10 @@
 	"repository": "https://github.com/vncsmnl/site.git",
 	"author": "vncsmnl <me@vncsmnl.dev>",
 	"license": "MIT",
+	"engines": {
+		"node": ">=22.0.0",
+		"npm": ">=11.0.0"
+	},
 	"prettier": {
 		"arrowParens": "always",
 		"bracketSpacing": true,

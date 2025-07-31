@@ -18,24 +18,54 @@ const ContentSecurityPolicy = `
  */
 const config = {
 	trailingSlash: true,
+	poweredByHeader: false,
+	compress: true,
+	compiler: {
+		removeConsole: process.env.NODE_ENV === 'production',
+	},
+	experimental: {
+		optimizePackageImports: ['@iconify/react', 'clsx', 'date-fns'],
+	},
 	images: {
-		unoptimized: true,
-		domains: [
+		formats: ['image/avif', 'image/webp'],
+		deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+		imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+		remotePatterns: [
 			// Discord assets
-			'cdn.discordapp.com',
-
+			{
+				protocol: 'https',
+				hostname: 'cdn.discordapp.com',
+				pathname: '/**',
+			},
 			// GitHub assets
-			'raw.githubusercontent.com',
-
+			{
+				protocol: 'https',
+				hostname: 'raw.githubusercontent.com',
+				pathname: '/**',
+			},
 			// Spotify Album Art
-			'i.scdn.co',
-
+			{
+				protocol: 'https',
+				hostname: 'i.scdn.co',
+				pathname: '/**',
+			},
 			// Streamable thumbnails
-			'cdn-cf-east.streamable.com',
-
+			{
+				protocol: 'https',
+				hostname: 'cdn-cf-east.streamable.com',
+				pathname: '/**',
+			},
 			// Unsplash
-			'source.unsplash.com',
-			'images.unsplash.com',
+			{
+				protocol: 'https',
+				hostname: 'source.unsplash.com',
+				pathname: '/**',
+			},
+			{
+				protocol: 'https',
+				hostname: 'images.unsplash.com',
+				pathname: '/**',
+			},
 		],
 	},
 	// Inspired by: https://github.com/leerob/leerob.io/blob/main/next.config.js#L44-L81
@@ -65,21 +95,65 @@ const config = {
 						key: 'Permissions-Policy',
 						value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
 					},
+					// Additional security headers for better performance
+					{
+						key: 'X-DNS-Prefetch-Control',
+						value: 'on',
+					},
+					{
+						key: 'X-Frame-Options',
+						value: 'DENY',
+					},
+					{
+						key: 'X-Content-Type-Options',
+						value: 'nosniff',
+					},
 				],
 			},
 		];
 	},
 	reactStrictMode: true,
+	productionBrowserSourceMaps: false,
 	webpack: (config, { dev, isServer }) => {
-		// TODO: Temp disabled as since upgrading `next` to v12.2.3 production builds fail & this seems to be the cause
 		// Replace React with Preact only in client production build
-		// if (!dev && !isServer) {
-		// 	Object.assign(config.resolve.alias, {
-		// 		react: 'preact/compat',
-		// 		'react-dom/test-utils': 'preact/test-utils',
-		// 		'react-dom': 'preact/compat',
-		// 	});
-		// }
+		if (!dev && !isServer) {
+			Object.assign(config.resolve.alias, {
+				react: 'preact/compat',
+				'react-dom/test-utils': 'preact/test-utils',
+				'react-dom': 'preact/compat',
+			});
+		}
+
+		// Optimize bundle splitting
+		if (!dev && !isServer) {
+			config.optimization.splitChunks = {
+				...config.optimization.splitChunks,
+				cacheGroups: {
+					...config.optimization.splitChunks.cacheGroups,
+					vendor: {
+						test: /[\\/]node_modules[\\/]/,
+						name: 'vendors',
+						chunks: 'all',
+						priority: 10,
+					},
+					common: {
+						minChunks: 2,
+						chunks: 'all',
+						name: 'common',
+						priority: 5,
+						enforce: true,
+					},
+				},
+			};
+		}
+
+		// Performance optimizations
+		config.resolve.fallback = {
+			...config.resolve.fallback,
+			fs: false,
+			path: false,
+			os: false,
+		};
 
 		config.plugins.push(new WindiCSS());
 
