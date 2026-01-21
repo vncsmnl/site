@@ -8,3 +8,4 @@ export * as Status from './Status';
 
 export { Animate } from './Animate.component';
 export { Event } from './Event.component';
+export { default as TrailingCursor } from './TrailingCursor.component';

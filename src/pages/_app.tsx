@@ -11,6 +11,7 @@ import 'nprogress/nprogress.css';
 import 'windi.css';
 
 import { colors, useClick } from '~/lib';
+import { TrailingCursor } from '~/components';
 import { Theme } from '~/types';
 
 NProgress.configure({
@@ -42,6 +43,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
 
 	return (
 		<ThemeProvider attribute="class" defaultTheme={Theme.SYSTEM} themes={Object.values(Theme)}>
+			<TrailingCursor />
 			<Analytics />
 			<Component {...pageProps} />
 			<style jsx global>{`
