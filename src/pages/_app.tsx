@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 
 import 'inter-ui/inter.css';
 import 'nprogress/nprogress.css';
+import 'katex/dist/katex.min.css';
 import 'windi.css';
 
 import { colors, useClick } from '~/lib';

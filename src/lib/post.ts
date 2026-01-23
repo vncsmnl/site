@@ -8,9 +8,10 @@ import RemarkCodeTitles from 'remark-code-titles';
 import RemarkEmoji from 'remark-emoji';
 import RemarkPrism from 'remark-prism';
 import RemarkSlug from 'remark-slug';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 import type { FrontMatter, Post, RawFrontMatter } from '~/types';
-import remarkMath from 'remark-math';
 
 const BLOG_POSTS_DIR = join(process.cwd(), 'src', 'data', 'blog');
 
@@ -58,7 +59,7 @@ export async function getPost(slug: string): Promise<Post> {
 	const source = await serialize(content, {
 		scope: data,
 		mdxOptions: {
-			rehypePlugins: [],
+			rehypePlugins: [rehypeKatex],
 			remarkPlugins: [RemarkCodeTitles, RemarkEmoji, RemarkPrism, RemarkSlug, remarkMath],
 		},
 	});
