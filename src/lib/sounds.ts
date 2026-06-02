@@ -1,9 +1,9 @@
 import { useSound } from 'use-sound';
 import { usePersistantState } from '.';
 
-import type { ReturnedValue } from 'use-sound/dist/types';
+type UseSoundReturn = ReturnType<typeof useSound>;
 
-export function useClick(): ReturnedValue | [() => void, null] {
+export function useClick(): UseSoundReturn | [() => void, null] {
 	const state = usePersistantState();
 	const result = useSound('/sounds/click.ogg', {
 		volume: 0.05,
@@ -12,7 +12,7 @@ export function useClick(): ReturnedValue | [() => void, null] {
 	if (!state.get().sound)
 		return [
 			// eslint-disable-next-line @typescript-eslint/no-empty-function
-			(): void => {},
+			(): void => { },
 			null,
 		];
 
