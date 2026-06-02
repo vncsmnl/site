@@ -15,6 +15,8 @@ import type { GitHubRepos, Project, ProjectPost } from '~/types';
 export async function fetchProjects(): Promise<Array<Project> | null> {
 	const response = await fetch('https://api.github.com/users/vncsmnl/repos', {
 		headers: {
+			accept: 'application/vnd.github+json',
+			'X-GitHub-Api-Version': '2022-11-28',
 			...(process.env.GITHUB_PAT && {
 				authorization: `token ${process.env.GITHUB_PAT}`,
 			}),
@@ -41,12 +43,13 @@ export async function fetchProjects(): Promise<Array<Project> | null> {
 
 	const projects: Array<Project> = json
 		.map((repo) => {
-			if (!repo.topics.includes('portfolio')) return null;
+			const topics = repo.topics ?? [];
+			if (!topics.includes('portfolio')) return null;
 
 			if (repo.archived) return null;
 
 			// Strip the emoji suffix from the repo description
-			const trimmedDescription = repo.description.split(' ');
+			const trimmedDescription = (repo.description ?? '').split(' ');
 			trimmedDescription.shift();
 			const description = trimmedDescription.join(' ');
 
