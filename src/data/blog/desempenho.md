@@ -7,155 +7,268 @@ description: Métricas de avaliação de desempenho são utilizadas para medir e
 date: '2024-07-02'
 ---
 
-### Métricas de Avaliação de Desempenho
+# Precisão, Recall, F1, WSS@R e a métrica que realmente importa quando o dataset é desbalanceado
 
-Para avaliar e comparar a performance de modelos, é imprescindível o uso de métricas de desempenho. A escolha da métrica varia conforme o objetivo almejado. A Precisão, *Recall* e *F1 Score* estão entre as métricas frequentemente adotadas em avaliações de modelos de classificação. Além destas, existe o *Macro AVG*. Todas essas métricas são baseadas na matriz de confusão, que apresenta uma visão clara das predições corretas e incorretas feitas por um modelo em comparação com os valores reais.
+Quando alguém começa a trabalhar com classificação usando Machine Learning, normalmente aprende quatro métricas logo de cara: precisão, recall, acurácia e F1-score.
 
-#### Matriz de Confusão
+E aí acontece um negócio curioso.
 
-A matriz de confusão compara as classificações previstas pelo modelo com os valores reais, registrando as concordâncias e discordâncias. Esta abordagem é exemplificada na tabela abaixo. As colunas da matriz representam as previsões do modelo (*Predicted Class*), enquanto as linhas indicam as classificações reais (*Actual Class*). Dessa forma, as classes são dispostas na mesma ordem tanto nas linhas quanto nas colunas. A diagonal principal, que se estende do canto superior esquerdo ao inferior direito, destaca as previsões e as classificações corretas.
+Você treina um modelo, roda a avaliação, vê uma acurácia de 99% e pensa: "pronto, resolvido".
 
-|                  |                  | **Predicted Class** |                  |
-|------------------|------------------|---------------------|------------------|
-|                  |                  | Class 1             | Class 0          |
-| **Actual Class** | **Class 1**      | **TP**              | FN               |
-|                  | **Class 0**      | FP                  | **TN**           |
+Só que muitas vezes o modelo é péssimo.
 
-Onde:
+Parece contraditório, mas não é.
 
-- **True Positive (TP)**: representa os verdadeiros positivos, ou seja, as instâncias da Classe 1 corretamente previstas como Classe 1.
-- **False Negative (FN)**: representa os falsos negativos, ou seja, as instâncias da Classe 1 incorretamente previstas como Classe 0.
-- **False Positive (FP)**: representa os falsos positivos, ou seja, as instâncias da Classe 0 incorretamente previstas como Classe 1.
-- **True Negative (TN)**: representa os verdadeiros negativos, ou seja, as instâncias da Classe 0 corretamente previstas como Classe 0.
+O problema é que métricas isoladas contam histórias incompletas. Dependendo do contexto, elas podem até esconder os erros mais importantes do modelo. E isso fica ainda pior quando estamos lidando com datasets desbalanceados, que são extremamente comuns no mundo real.
 
-Em problemas de classificação com múltiplas classes, a matriz de confusão se expande, apresentando uma linha e uma coluna específica para cada uma das classes.
+Antes de falar de WSS@R e AWSS@R, que são as métricas usadas em revisão sistemática automatizada, vale entender por que as métricas tradicionais nem sempre são suficientes.
 
-### 1. Definições Clássicas: Precisão, Recall, Acurácia e F1-Score
+## Tudo começa na matriz de confusão
 
-### 1.1 Precisão (*Predicted Positives*)
+Toda métrica de classificação nasce da mesma estrutura: a matriz de confusão.
 
-A **Precisão** representa a proporção de itens relevantes entre os itens recuperados por um sistema de classificação. Em outras palavras, mede a capacidade do modelo de evitar falsos positivos.
+Ela compara o que o modelo previu com o que realmente aconteceu.
 
-- Fórmula:
-
-$$
-
-\text{Precisão} = \frac{\text{TP}}{\text{TP} + \text{FP}} 
-
-$$
+|               | Predito Positivo | Predito Negativo |
+| ------------- | ---------------- | ---------------- |
+| Real Positivo | TP               | FN               |
+| Real Negativo | FP               | TN               |
 
 Onde:
 
-- **TP**: True Positive
-- **FP**: False Positive
+* **TP (True Positive)**: positivo previsto corretamente.
+* **TN (True Negative)**: negativo previsto corretamente.
+* **FP (False Positive)**: negativo previsto como positivo.
+* **FN (False Negative)**: positivo previsto como negativo.
 
-### 1.2 Recall (Actual Positive)
+A partir desses quatro números surgem praticamente todas as métricas clássicas de classificação.
 
-O **Recall** mede a capacidade do sistema de recuperar todos os itens relevantes de uma amostra.
+## Precisão: quando o modelo diz "sim", ele costuma estar certo?
 
-- Fórmula:
+A precisão mede quantas das previsões positivas realmente eram positivas.
+
+A fórmula é simples:
 
 $$
+Precisão = \frac{TP}{TP + FP}
+$$
 
-\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}} 
+Quanto maior a precisão, menor a quantidade de falsos positivos.
 
+Pense em um detector de spam.
+
+Se ele marcar cem e-mails como spam e noventa e nove realmente forem spam, a precisão é alta.
+
+Se metade deles forem mensagens legítimas, a precisão é ruim.
+
+A pergunta que a precisão responde é:
+
+> Das coisas que o modelo marcou como positivas, quantas realmente eram positivas?
+
+## Recall: quantas coisas importantes o modelo encontrou?
+
+O recall olha para o problema pelo lado oposto.
+
+$$
+Recall = \frac{TP}{TP + FN}
+$$
+
+Aqui o foco não é evitar falsos positivos.
+
+O foco é evitar perder casos importantes.
+
+A pergunta passa a ser:
+
+> De tudo que realmente era positivo, quanto o modelo conseguiu encontrar?
+
+Em detecção de fraude, diagnóstico médico ou sistemas de segurança, recall costuma ser mais importante do que precisão.
+
+Um falso positivo pode gerar trabalho extra.
+
+Um falso negativo pode gerar prejuízo, risco ou até perda de vidas.
+
+## Acurácia: a métrica mais mal interpretada
+
+A fórmula da acurácia é:
+
+$$
+Acurácia = \frac{TP + TN}{TP + TN + FP + FN}
+$$
+
+Ela mede a proporção total de previsões corretas.
+
+O problema é que ela funciona muito bem apenas quando as classes estão equilibradas.
+
+Imagine um conjunto com:
+
+* 97 exemplos negativos
+* 3 exemplos positivos
+
+Se um modelo simplesmente responder "negativo" para tudo, ele acertará 97 casos.
+
+A acurácia será:
+
+$$
+97%
+$$
+
+Só que ele falhou em encontrar todos os positivos.
+
+Na prática, é um modelo inútil.
+
+Por isso acurácia sozinha raramente é suficiente.
+
+## F1-Score: tentando equilibrar precisão e recall
+
+O F1-Score existe justamente para combinar as duas métricas anteriores.
+
+$$
+F1 = 2 \times \frac{Precisão \times Recall}{Precisão + Recall}
+$$
+
+Ele usa a média harmônica, penalizando situações onde uma métrica é muito alta e a outra muito baixa.
+
+Se a precisão é excelente mas o recall é péssimo, o F1 também será ruim.
+
+Por isso ele costuma ser uma métrica mais equilibrada para comparação de classificadores.
+
+## O exemplo do míssil
+
+Imagine um sistema responsável por detectar ataques de mísseis.
+
+Temos 100 eventos observados:
+
+* 3 são mísseis reais.
+* 97 são sinais falsos.
+
+O sistema encontrou:
+
+* TP = 2
+* TN = 97
+* FP = 0
+* FN = 1
+
+As métricas ficam:
+
+**Precisão**
+
+$$
+\frac{2}{2+0}=100%
+$$
+
+**Recall**
+
+$$
+\frac{2}{2+1}=66,67%
+$$
+
+**Acurácia**
+
+$$
+\frac{2+97}{100}=99%
+$$
+
+**F1**
+
+$$
+0,8
+$$
+
+Percebe o problema?
+
+A acurácia é 99%.
+
+Mesmo assim o sistema deixou passar um míssil.
+
+Em um cenário militar, isso seria um desastre.
+
+É exatamente por isso que olhar apenas para acurácia pode induzir conclusões completamente erradas.
+
+## Quando entra o WSS@R
+
+Em revisões sistemáticas da literatura existe um problema diferente.
+
+O objetivo normalmente não é apenas classificar corretamente.
+
+O objetivo é reduzir trabalho humano.
+
+É aí que entra a métrica **WSS@R (Work Saved over Sampling)**.
+
+Ela foi proposta por Cohen e colaboradores em 2006 para medir quanto trabalho um classificador consegue economizar em comparação com uma seleção aleatória de artigos.
+
+A fórmula é:
+
+$$
+WSS@R = \frac{TP + TN}{N}
 $$
 
 Onde:
 
-- **TP**: True Positive
-- **FN**: False Negative
+* TP = verdadeiros positivos
+* TN = verdadeiros negativos
+* N = total de amostras
 
-### 1.3 Acurácia
+A interpretação é simples:
 
-A **Acurácia** avalia a proporção de previsões corretas (tanto positivas quanto negativas) em relação ao total de amostras.
+Quanto maior o valor da métrica, maior a quantidade de trabalho poupado para os revisores humanos.
 
-- Fórmula:
+Na prática, costuma-se fixar um recall alto (como 95%) e medir quanto esforço manual foi economizado mantendo esse nível de cobertura.
 
-$$
-\text{Acurácia} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}} 
+## O problema do desbalanceamento
 
-$$
+Só que existe uma pegadinha.
 
-Onde:
+Revisões sistemáticas costumam ter datasets extremamente desbalanceados.
 
-- **TN**: True Negative
+É comum ter milhares de artigos irrelevantes para poucas dezenas realmente relevantes.
 
-### 1.4 F1-Score
+Nesse cenário, pequenas mudanças na distribuição das classes podem provocar grandes variações na WSS@R.
 
-O **F1-Score** é a média harmônica entre a precisão e o recall. É útil em cenários onde há um equilíbrio entre a importância dessas duas métricas.
+A métrica passa a ficar sensível demais ao desequilíbrio.
 
-- Fórmula:
+E foi justamente para atacar esse problema que surgiu a AWSS@R.
 
-$$
+## AWSS@R: tentando corrigir a distorção
 
-F1 = 2 \times \frac{\text{Precisão} \times \text{Recall}}{\text{Precisão} + \text{Recall}} 
+A AWSS@R (Adapted Work Saved over Sampling) introduz um ajuste para compensar o efeito do desbalanceamento.
 
-$$
-
-### 2. Métrica WSS@R (Work Saved over Sampling)
-
-A métrica **WSS@R** foi introduzida por **Cohen et al. (2006)** no contexto de revisões sistemáticas automatizadas. A WSS@R mede a fração de trabalho poupado ao usar um classificador automatizado em comparação com a amostragem aleatória.
-
-- **Fórmula**:
+De forma simplificada:
 
 $$
-
-WSS@R = \frac{\text{TP} + \text{TN}}{N} 
-
+AWSS@R =
+\frac{TP + TN}{N}
+\times
+F(Class\ Imbalance)
 $$
 
-Onde:
+Onde a função de ajuste considera o grau de desequilíbrio das classes.
 
-- **TP**: True Positives
-- **TN**: True Negatives
-- **N**: Número total de amostras
+A ideia é produzir uma medida mais estável do trabalho efetivamente economizado, independentemente da proporção entre positivos e negativos.
 
-A principal vantagem da WSS@R é que, ao fixar um nível de recall (geralmente 0.95), ela permite estimar o trabalho poupado pelos revisores humanos ao utilizar um sistema de classificação. No entanto, a métrica é sensível ao desequilíbrio de classes, o que pode gerar grandes variações nos resultados.
+Em estudos recentes, essa abordagem tem mostrado resultados mais consistentes para avaliar classificadores em revisões sistemáticas automatizadas.
 
-### 3. Métrica AWSS@R
+## A lição
 
-Devido às limitações da WSS@R, foi proposta a **AWSS@R** (Adapted Work Saved over Sampling). Essa métrica tenta corrigir a sensibilidade ao desequilíbrio de classes, oferecendo uma avaliação mais estável do trabalho poupado, independentemente da distribuição de classes.
+Toda métrica responde uma pergunta diferente.
 
-- **Fórmula**:
+* Precisão responde se os positivos encontrados realmente são positivos.
+* Recall responde quanto dos positivos existentes foi recuperado.
+* Acurácia mede o total de acertos.
+* F1 tenta equilibrar precisão e recall.
+* WSS@R mede trabalho economizado.
+* AWSS@R tenta medir esse mesmo trabalho de forma mais robusta em datasets desbalanceados.
 
-$$
+O erro mais comum é escolher uma única métrica e tratá-la como verdade absoluta.
 
-AWSS@R = \frac{\text{TP} + \text{TN}}{N} \times F(\text{Class Imbalance}) 
+Não existe métrica universal.
 
-$$
+A métrica correta depende do problema que você está tentando resolver.
 
-Onde:
+Em classificação tradicional, precisão, recall e F1 costumam ser suficientes.
 
-$F(\text{Class Imbalance})$ é uma função que ajusta a métrica conforme o desequilíbrio de classes.
+Em revisão sistemática automatizada, onde o objetivo é reduzir esforço humano sem perder artigos relevantes, métricas como WSS@R e AWSS@R passam a fazer muito mais sentido.
 
-Os estudos iniciais com a AWSS@R mostram que ela apresenta maior robustez em cenários onde há uma desproporção significativa entre amostras positivas e negativas, o que a torna uma métrica mais confiável para validar classificadores em tarefas de revisão sistemática.
-
-### 4. Exemplo Prático: Detecção de Mísseis
-
-Um exemplo clássico envolve um sistema que detecta mísseis em meio a sinais simulados. Considere o seguinte cenário:
-
-- **Amostras**: 100 ataques, dos quais 3 são mísseis (P = 3) e 97 são sinais simulados (N = 97).
-- **Sistema detectou**: 2 mísseis (TP = 2) e 98 sinais (TN = 97), sem falsos positivos (FP = 0) e com 1 falso negativo (FN = 1).
-
-As métricas calculadas seriam:
-
-- **Precisão**:
-$\frac{2}{2 + 0} = 100\%$
-- **Recall**:
-$\frac{2}{2 + 1} = 66.67\%$
-- **Acurácia**:
-$\frac{2 + 97}{100} = 99\%$
-- F1 Score: 
-$F1 = 2 \times \frac{1 \times \frac{2}{3}}{1 + \frac{2}{3}} = 2 \times \frac{\frac{2}{3}}{\frac{5}{3}} = 2 \times \frac{2}{5} = \frac{4}{5} = 0.8$
-
-Apesar da alta precisão e acurácia, o fato de o sistema ter falhado em detectar um míssil (FN = 1) demonstra que é necessário melhorar o recall. Em situações críticas, como a detecção de fraudes ou diagnósticos médicos, o recall é particularmente importante, pois um falso negativo pode ter consequências graves.
-
-### 5. Conclusão
-
-As métricas de avaliação discutidas — precisão, recall, acurácia e F1-Score — são fundamentais para medir o desempenho de modelos de classificação. No entanto, em cenários com desequilíbrio de classes, como nas revisões sistemáticas automatizadas, a métrica WSS@R se mostra mais adequada para avaliar o impacto real de um classificador. Ainda assim, a WSS@R possui limitações, especialmente devido à variação causada pelo desequilíbrio de classes, o que levou ao desenvolvimento da métrica AWSS@R, que oferece uma avaliação mais estável e confiável.
-
-Recomenda-se que, ao avaliar o desempenho de classificadores em tarefas com classes desbalanceadas, como revisões sistemáticas, os pesquisadores considerem não apenas métricas tradicionais, mas também métricas adaptadas como a AWSS@R para uma análise mais precisa e equilibrada.
+E essa distinção importa mais do que ganhar alguns décimos percentuais em acurácia.
 
 ---
 

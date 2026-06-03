@@ -7,70 +7,89 @@ description: Os primeiros 5 princípios do design orientado a objeto
 date: '2023-06-29'
 ---
 
-## Início
+SOLID é um acrônimo de cinco princípios de design de software orientado a objetos, compilados por Robert C. Martin. O foco é orientar a estrutura de classes e o fluxo de dependências para facilitar a manutenção de sistemas em crescimento.
 
-S.O.L.I.D é uma sigla que lembra cinco regras importantes para criar programas de computador usando uma forma de programar chamada **programação orientada a objetos**. Essa forma de programar é como se você criasse vários objetos que podem se comunicar e fazer coisas diferentes. Por exemplo, você pode ter um objeto que representa um carro, outro que representa um motorista, outro que representa uma estrada, e assim por diante.
+Quando o projeto é estruturado no estilo orientado a objetos, os componentes precisam interagir sem gerar acoplamento rígido. Vou destrinchar as cinco regras com pragmatismo.
 
-As regras do S.O.L.I.D são:
+### SRP: Single-responsibility Principle (Responsabilidade Única)
 
-- **S** de **Single-responsibility principle** (princípio da responsabilidade única): cada objeto deve ter apenas uma responsabilidade, ou seja, fazer apenas uma coisa bem feita. Por exemplo, o objeto carro deve saber como andar, mas não deve saber como dirigir. Isso é responsabilidade do objeto motorista.
+Uma classe tem um motivo para mudar. Se o objeto gerencia a conexão com o banco de dados e também formata um relatório em tela, existe um problema de fronteira. Separe os domínios. No exemplo de código, a classe do carro expõe a locomoção. O ato de dirigir fica isolado na entidade do motorista.
 
-- **O** de **Open-closed principle** (princípio do aberto-fechado): cada objeto deve ser aberto para ser extendido, mas fechado para ser modificado. Isso significa que você pode criar novos objetos a partir de outros objetos, mas sem mudar o que eles já fazem. Por exemplo, você pode criar um objeto carro esportivo a partir do objeto carro, mas sem mudar como o carro anda.
+### OCP: Open-closed Principle (Aberto-Fechado)
 
-- **L** de **Liskov substitution principle** (princípio da substituição de Liskov): cada objeto deve poder ser substituído por outro objeto que tenha a mesma responsabilidade. Isso significa que você pode usar qualquer tipo de carro no lugar de outro carro, desde que eles façam a mesma coisa. Por exemplo, você pode usar um carro esportivo ou um carro popular para levar o motorista até a estrada.
+O design permite adicionar comportamento estendendo a base de código, sem modificar arquivos que já funcionam em produção. Você cria classes derivadas ou implementa interfaces em vez de encher a classe base de blocos condicionais. Um carro esportivo estende o contrato de um carro base, injetando o comportamento de aceleração específica.
 
-- **I** de **Interface segregation principle** (princípio da segregação de interface): cada objeto deve ter apenas as interfaces que precisa para se comunicar com outros objetos. Uma interface é como um contrato que diz o que um objeto pode fazer e como ele pode fazer. Por exemplo, o objeto carro pode ter uma interface que diz como ele anda, mas não precisa ter uma interface que diz como ele liga o rádio. Isso é irrelevante para outros objetos.
+### LSP: Liskov Substitution Principle (Substituição de Liskov)
 
-- **D** de **Dependency inversion principle** (princípio da inversão de dependência): cada objeto deve depender de abstrações e não de detalhes. Uma abstração é algo mais geral e simples, enquanto um detalhe é algo mais específico e complexo. Por exemplo, o objeto motorista deve depender do objeto carro, mas não dos detalhes de como o carro funciona por dentro. Isso é abstrair o carro.
+Tipos derivados são substituíveis por seus tipos base. Se o sistema espera a abstração de um veículo, você injeta um carro popular ou esportivo e a execução flui sem quebrar o contrato. O subtipo respeita a assinatura e as premissas do tipo original.
 
-Essas regras ajudam a criar programas mais fáceis de entender, adaptar e melhorar. Elas foram criadas por um programador chamado Robert C. Martin (Tio Bob) no ano 2000 e são usadas por muitos programadores no mundo todo.
+### ISP: Interface Segregation Principle (Segregação de Interface)
 
-```python # Princípio da Responsabilidade Única (SRP)
-class Carro:
-    def andar(self):
-        print("O carro está andando.")
+Clientes não são forçados a depender de métodos que não utilizam. Interfaces largas geram ruído e acoplamento sem necessidade. É viável dividir os contratos por escopo de uso. Uma interface dita a locomoção e uma interface separada dita o uso do rádio.
 
-class Motorista:
-    def dirigir(self, carro):
-        carro.andar()
+### DIP: Dependency Inversion Principle (Inversão de Dependência)
 
-# Princípio do Aberto-Fechado (OCP)
-class CarroEsportivo(Carro):
-    def andar(self):
-        print("O carro esportivo está andando rápido.")
+Módulos de alto nível não dependem de implementações de baixo nível. Ambos dependem de abstrações. O motorista não é acoplado aos cilindros do motor de uma marca em específico. Ele depende da interface genérica de direção.
 
-# Princípio da Substituição de Liskov (LSP)
-def levar_carro_ate_estrada(carro: Carro):
-    carro.andar()
+---
 
-# Princípio da Segregação de Interface (ISP)
-class Carro:
-    def andar(self):
+Abaixo, estruturei o código em Python usando tipagem estática e classes abstratas (`abc`) para sair do modelo inicial e ilustrar a engenharia de fato.
+
+```python
+from abc import ABC, abstractmethod
+
+# SRP: A interface Veiculo foca na movimentação.
+# ISP: Não forçamos métodos como "ligar_radio" na interface base.
+class Veiculo(ABC):
+    @abstractmethod
+    def andar(self) -> None:
         pass
 
-class CarroComRadio:
-    def ligar_radio(self):
-        print("O rádio está ligado.")
+class Carro(Veiculo):
+    def andar(self) -> None:
+        print("O carro está em movimento.")
 
-# Princípio da Inversão de Dependência (DIP)
+# OCP: Criamos um comportamento estendendo a abstração, sem alterar a classe Carro.
+class CarroEsportivo(Veiculo):
+    def andar(self) -> None:
+        print("O carro esportivo está acelerando.")
+
+# ISP: Funcionalidades adjacentes ganham suas próprias interfaces.
+class AparelhoDeSom(ABC):
+    @abstractmethod
+    def ligar_radio(self) -> None:
+        pass
+
+class CarroComSom(Veiculo, AparelhoDeSom):
+    def andar(self) -> None:
+        print("O carro está em movimento.")
+    
+    def ligar_radio(self) -> None:
+        print("O rádio está operando.")
+
+# DIP & SRP: O motorista depende da abstração (Veiculo), não da implementação concreta.
 class Motorista:
-    def __init__(self, carro: Carro):
-        self.carro = carro
+    def __init__(self, veiculo: Veiculo):
+        self.veiculo = veiculo
 
-    def dirigir(self):
-        self.carro.andar()
+    def dirigir(self) -> None:
+        self.veiculo.andar()
+
+# LSP: Classes que implementam Veiculo operam na função base sem efeitos colaterais.
+def iniciar_trajeto(veiculo: Veiculo) -> None:
+        veiculo.andar()
 
 # Exemplo de uso
-carro = Carro()
-carro_esportivo = CarroEsportivo()
-estrada = Estrada()
+carro_padrao = Carro()
+carro_veloz = CarroEsportivo()
 
-motorista = Motorista(carro)
-motorista.dirigir()  # O motorista dirige o carro
+motorista_um = Motorista(carro_padrao)
+motorista_um.dirigir() 
 
-motorista = Motorista(carro_esportivo)
-motorista.dirigir()  # O motorista dirige o carro esportivo
+motorista_dois = Motorista(carro_veloz)
+motorista_dois.dirigir()
 
-levar_carro_ate_estrada(carro)  # Levando um carro até a estrada
-levar_carro_ate_estrada(carro_esportivo)  # Levando um carro esportivo até a estrada
+iniciar_trajeto(carro_padrao)
+iniciar_trajeto(carro_veloz)
+
 ```
