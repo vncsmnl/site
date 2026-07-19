@@ -3,7 +3,6 @@
 	"version": 2,
 	"alias": "vini.thedev.id",
 	"cleanUrls": true,
-	"public": true,
 	"regions": [
 		"lhr1"
 	],
