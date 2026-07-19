@@ -1,15 +1,39 @@
 [
 	{
+		"date": "03-17-2026",
+		"title": "Started Ph.D.'s program!",
+		"description": "Began studying Computer Science, Information Systems at University of Brasilia",
+		"icon": "feather:award"
+	},
+	{
+		"date": "02-25-2026",
+		"title": "Finished Master's program!",
+		"description": "Get my Master's degree in Computer Science, Information Systems at University of Brasilia",
+		"icon": "feather:award"
+	},
+	{
 		"date": "03-18-2024",
 		"title": "Started Master's degree!",
 		"description": "Began studying Computer Science, Information Systems at University of Brasilia",
 		"icon": "feather:award"
 	},
 	{
+		"date": "05-01-2024",
+		"title": "Finished College",
+		"description": "Get my College degree in Computer Science, Information Systems at Anhanguera Educacional",
+		"icon": "feather:trending-up"
+	},
+	{
 		"date": "02-05-2022",
 		"title": "Started College",
 		"description": "Began studying Computer Science, Information Systems at Anhanguera Educacional",
 		"icon": "feather:trending-up"
+	},
+	{
+		"date": "02-02-2020",
+		"title": "Finished University",
+		"description": "Get my University degree in Biomedical Science at Catholic University of Brasilia",
+		"icon": "feather:book"
 	},
 	{
 		"date": "02-10-2017",
