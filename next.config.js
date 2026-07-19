@@ -6,7 +6,6 @@ const { withAxiom } = require('next-axiom');
  */
 const config = {
 	trailingSlash: true,
-	output: 'export',
 	poweredByHeader: false,
 	compress: true,
 	compiler: {
