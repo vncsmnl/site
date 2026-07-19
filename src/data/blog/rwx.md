@@ -4,7 +4,7 @@ banner: https://images.unsplash.com/photo-1629654297299-c8506221ca97?q=80&w=1074
 title_prefix: rwx
 title: Parei de decorar chmod. Então escrevi um TUI pra isso.
 description: Depois de anos abrindo o Google pra lembrar chmod 755, chmod -R e permissões Unix, resolvi escrever o rwx, um TUI em Rust que transforma permissões, ownership e bits especiais numa interface visual.
-date: 2026-07-19
+date: '2026-07-19'
 ---
 
 
