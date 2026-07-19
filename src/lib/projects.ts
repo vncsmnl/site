@@ -13,35 +13,48 @@ import type { GitHubRepos, Project, ProjectPost } from '~/types';
  * @TODO Switch to v3 API using GraphQL to save over-fetching
  */
 export async function fetchProjects(): Promise<Array<Project> | null> {
-	const response = await fetch('https://api.github.com/users/vncsmnl/repos', {
-		headers: {
-			accept: 'application/vnd.github+json',
-			'X-GitHub-Api-Version': '2022-11-28',
-			...(process.env.GITHUB_PAT && {
-				authorization: `token ${process.env.GITHUB_PAT}`,
-			}),
-		},
-	});
-	if (response.status !== 200) {
-		const json = (await response.json()) as {
-			documentation_url: string;
-			message: string;
-		};
+	const repos: GitHubRepos = [];
+	let page = 1;
 
-		console.error({ error: json });
-		log.error('Failed to fetch projects', {
-			error: json,
-		});
+	while (true) {
+		const response = await fetch(
+			`https://api.github.com/users/vncsmnl/repos?per_page=100&page=${page}`,
+			{
+				headers: {
+					accept: 'application/vnd.github+json',
+					'X-GitHub-Api-Version': '2022-11-28',
+					...(process.env.GITHUB_PAT && {
+						authorization: `token ${process.env.GITHUB_PAT}`,
+					}),
+				},
+			},
+		);
+		if (response.status !== 200) {
+			const json = (await response.json()) as {
+				documentation_url: string;
+				message: string;
+			};
 
-		return null;
+			console.error({ error: json });
+			log.error('Failed to fetch projects', {
+				error: json,
+			});
+
+			return null;
+		}
+
+		const pageRepos = (await response.json()) as GitHubRepos;
+		repos.push(...pageRepos);
+
+		if (pageRepos.length < 100) break;
+
+		page += 1;
 	}
-
-	const json = (await response.json()) as GitHubRepos;
 
 	const { default: rawProjectPosts } = await import('~/data/projects.json');
 	const projectPosts = rawProjectPosts as Array<ProjectPost>;
 
-	const projects: Array<Project> = json
+	const projects: Array<Project> = repos
 		.map((repo) => {
 			const topics = repo.topics ?? [];
 			if (!topics.includes('portfolio')) return null;

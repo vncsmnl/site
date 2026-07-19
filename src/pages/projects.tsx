@@ -18,7 +18,7 @@ export const getStaticProps: GetStaticProps<ProjectProps> = async () => {
 		props: {
 			stringifiedProjects: JSON.stringify(projects),
 		},
-		revalidate: 3600,
+		revalidate: 300,
 	};
 };
 
